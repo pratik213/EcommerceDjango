@@ -82,6 +82,18 @@ def topwear(request,data=None):
 
     return render(request, 'app/topwear.html',{'topwear':topwear})
 
+def bottomwear(request,data=None):
+    if data==None:
+        bottomwear=Product.objects.filter(category='BW')
+    elif data=='adidas' or data=='nike':
+        bottomwear=Product.objects.filter(category='BW').filter(brand=data)
+    elif data=='below':
+        bottomwear=Product.objects.filter(category='BW').filter(discounted_price__lt=5001)
+    elif data=='above':
+        bottomwear=Product.objects.filter(category='BW').filter(discounted_price__gt=5000)
+
+    return render(request, 'app/bottomwear.html',{'bottomwear':bottomwear})
+
 def login(request):
  return render(request, 'app/login.html')
 
