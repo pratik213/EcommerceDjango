@@ -70,6 +70,18 @@ def laptop(request,data=None):
 
     return render(request, 'app/laptop.html',{'laptop':laptop})
 
+def topwear(request,data=None):
+    if data==None:
+        topwear=Product.objects.filter(category='TW')
+    elif data=='adidas' or data=='nike':
+        topwear=Product.objects.filter(category='TW').filter(brand=data)
+    elif data=='below':
+        topwear=Product.objects.filter(category='TW').filter(discounted_price__lt=5001)
+    elif data=='above':
+        topwear=Product.objects.filter(category='TW').filter(discounted_price__gt=5000)
+
+    return render(request, 'app/topwear.html',{'topwear':topwear})
+
 def login(request):
  return render(request, 'app/login.html')
 
