@@ -56,7 +56,6 @@ def mobile(request,data=None):
     elif data=='above':
         mobile=Product.objects.filter(category='M').filter(discounted_price__gt=10000)
 
-    
     return render(request, 'app/mobile.html',{'mobile':mobile})
 
 def login(request):
