@@ -58,6 +58,18 @@ def mobile(request,data=None):
 
     return render(request, 'app/mobile.html',{'mobile':mobile})
 
+def laptop(request,data=None):
+    if data==None:
+        laptop=Product.objects.filter(category='L')
+    elif data=='Dell' or data=='Apple':
+        laptop=Product.objects.filter(category='L').filter(brand=data)
+    elif data=='below':
+        laptop=Product.objects.filter(category='L').filter(discounted_price__lt=40001)
+    elif data=='above':
+        laptop=Product.objects.filter(category='L').filter(discounted_price__gt=40000)
+
+    return render(request, 'app/laptop.html',{'laptop':laptop})
+
 def login(request):
  return render(request, 'app/login.html')
 
