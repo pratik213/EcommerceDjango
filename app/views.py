@@ -77,7 +77,7 @@ def laptop(request,data=None):
 def topwear(request,data=None):
     if data==None:
         topwear=Product.objects.filter(category='TW')
-    elif data=='adidas' or data=='nike':
+    elif data=='puma' or data=='sonam':
         topwear=Product.objects.filter(category='TW').filter(brand=data)
     elif data=='below':
         topwear=Product.objects.filter(category='TW').filter(discounted_price__lt=5001)
