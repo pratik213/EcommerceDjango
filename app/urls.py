@@ -2,6 +2,8 @@ from django.urls import path
 from app import views
 from django.conf.urls.static import static
 from django.conf import settings
+from django.contrib.auth import views as auth_views
+from . forms import LoginForm
 
 urlpatterns = [
     path('', views.ProductView.as_view()),
@@ -20,7 +22,7 @@ urlpatterns = [
     path('topwear/', views.topwear, name='topwear'),
     path('bottomwear/<slug:data>', views.bottomwear, name='bottomweardata'),
     path('bottomwear/', views.bottomwear, name='bottomwear'),
-    path('login/', views.login, name='login'),
-    path('registration/', views.customerregistration, name='customerregistration'),
+    path('accounts/login', auth_views.LoginView.as_view(template_name="app/login.html",authentication_form=LoginForm), name='login'),
+    path('registration/', views.CustomerRegistration.as_view(), name='customerregistration'),
     path('checkout/', views.checkout, name='checkout'),
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

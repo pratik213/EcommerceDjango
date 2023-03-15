@@ -1,6 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views import View
 from . models import Customer,Product,Cart,OrderPlaced
+from . forms import CustomerRegistrationForm,LoginForm
+from django.contrib import messages
+from django.contrib.auth import login,authenticate
+
 
 # def home(request):
 #  return render(request, 'app/home.html')
@@ -93,12 +97,18 @@ def bottomwear(request,data=None):
         bottomwear=Product.objects.filter(category='BW').filter(discounted_price__gt=5000)
 
     return render(request, 'app/bottomwear.html',{'bottomwear':bottomwear})
+class CustomerRegistration(View):
+    def get(self,request):
+        form=CustomerRegistrationForm()
+        return render(request, 'app/customerregistration.html',{'form':form})
 
-def login(request):
- return render(request, 'app/login.html')
+    def post(self,request):
+        form=CustomerRegistrationForm(request.POST)
+        if form.is_valid():
+            messages.success(request, "Congratulation you have completed your registration")
+            form.save()
+        return render(request, 'app/customerregistration.html',{'form':form})
 
-def customerregistration(request):
- return render(request, 'app/customerregistration.html')
 
 def checkout(request):
  return render(request, 'app/checkout.html')
