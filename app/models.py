@@ -14,7 +14,7 @@ PROVINCE_CHOICES=(
 
 class Customer(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE)
-    name=models.CharField(max_length=200)
+    name=models.CharField(max_length=200,unique=True)
     locality=models.CharField(max_length=200)
     city=models.CharField(max_length=200)
     zipcode=models.IntegerField()
