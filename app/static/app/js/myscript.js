@@ -67,7 +67,7 @@ $('.remove-cart').click(function(){
         type:"GET",
         url:"/removecart",
         data: {
-            prod_id : id
+        prod_id : id
         },
         success:function(data){
             document.getElementById("amount").innerText=data.amount
